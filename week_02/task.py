@@ -1,5 +1,5 @@
 class AirCastle:
-    def __init__(self, height, n_clouds, color):
+    def __init__(self, height, n_clouds, color)->None:
         """
         Инициализация замка с заданной высотой, количеством облаков и цветом.
 
@@ -11,7 +11,7 @@ class AirCastle:
         self.n_clouds = n_clouds
         self.color = color
 
-    def change_height(self, value):
+    def change_height(self, value)->None:
         """
         Изменяет высоту замка, если значение больше или равно 0.
 
@@ -20,7 +20,7 @@ class AirCastle:
         if value >= 0:
             self.height = value
 
-    def sum(self, n):
+    def sum(self, n)->None:
         """
         Увеличивает количество облаков и соответственно высоту замка.
 
@@ -29,7 +29,7 @@ class AirCastle:
         self.n_clouds += n
         self.height += n // 5
 
-    def __call__(self, transparency):
+    def __call__(self, transparency)->int:
         """
         Возвращает результат вычислений, связанный с прозрачностью.
 
@@ -38,7 +38,7 @@ class AirCastle:
         """
         return self.height // transparency * self.n_clouds
 
-    def __str__(self):
+    def __str__(self)->str:
         """
         Возвращает строковое представление замка.
 
@@ -46,7 +46,7 @@ class AirCastle:
         """
         return f"The AirCastle at an altitude of {self.height} meters is {self.color} with {self.n_clouds} clouds"
 
-    def __eq__(self, other):
+    def __eq__(self, other)->bool:
         """
         Проверяет равенство двух замков по высоте, цвету и количеству облаков.
 
@@ -55,7 +55,7 @@ class AirCastle:
         """
         return (self.n_clouds, self.height, self.color) == (other.n_clouds, other.height, other.color)
 
-    def __lt__(self, other):
+    def __lt__(self, other)->bool:
         """
         Проверяет, меньше ли текущий замок другого по количеству облаков, высоте и цвету.
 
@@ -64,7 +64,7 @@ class AirCastle:
         """
         return (self.n_clouds, self.height, self.color) < (other.n_clouds, other.height, other.color)
 
-    def __le__(self, other):
+    def __le__(self, other)->bool:
         """
         Проверяет, меньше или равно ли текущее состояние замка состоянию другого замка.
 
@@ -73,7 +73,7 @@ class AirCastle:
         """
         return (self.n_clouds, self.height, self.color) <= (other.n_clouds, other.height, other.color)
 
-    def __gt__(self, other):
+    def __gt__(self, other)->bool:
         """
         Проверяет, больше ли текущий замок другого по количеству облаков, высоте и цвету.
 
@@ -82,7 +82,7 @@ class AirCastle:
         """
         return (self.n_clouds, self.height, self.color) > (other.n_clouds, other.height, other.color)
 
-    def __ge__(self, other):
+    def __ge__(self, other)->bool:
         """
         Проверяет, больше или равно ли текущее состояние замка состоянию другого замка.
 
@@ -91,7 +91,7 @@ class AirCastle:
         """
         return (self.n_clouds, self.height, self.color) >= (other.n_clouds, other.height, other.color)
 
-    def __ne__(self, other):
+    def __ne__(self, other)->bool:
         """
         Проверяет, не равен ли текущий замок другому.
 
@@ -102,7 +102,7 @@ class AirCastle:
 
 
 class MagicAirCastle(AirCastle):
-    def __init__(self, height, n_clouds, color, magic_power):
+    def __init__(self, height, n_clouds, color, magic_power)->None:
         """
         Инициализация волшебного замка с магической силой.
 
@@ -114,7 +114,7 @@ class MagicAirCastle(AirCastle):
         AirCastle.__init__(self, height, n_clouds, color)  # Явный вызов конструктора родительского класса
         self.magic_power = magic_power
 
-    def cast_spell(self):
+    def cast_spell(self)->str:
         """
         Произносит заклинание с магической силой замка.
 
@@ -125,7 +125,7 @@ class MagicAirCastle(AirCastle):
 
 # Композиция
 class Cloud:
-    def __init__(self, size):
+    def __init__(self, size)->None:
         """
         Инициализация облака с заданным размером.
 
@@ -133,7 +133,7 @@ class Cloud:
         """
         self.size = size
 
-    def __str__(self):
+    def __str__(self)->str:
         """
         Возвращает строковое представление облака.
 
@@ -143,7 +143,7 @@ class Cloud:
 
 
 class AirCastleWithClouds:
-    def __init__(self, height, clouds, color):
+    def __init__(self, height, clouds, color)->None:
         """
         Инициализация замка с облаками.
 
@@ -155,7 +155,7 @@ class AirCastleWithClouds:
         self.clouds = [Cloud(size) for size in clouds]
         self.color = color
 
-    def __str__(self):
+    def __str__(self)->str:
         """
         Возвращает строковое представление замка с облаками.
 
