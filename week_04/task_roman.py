@@ -82,9 +82,8 @@ plus = roman.__add__(4)
 minus = roman.__sub__(4)
 umnozhit = roman.__mul__(4)
 razdelit = roman.__truediv__(4)
-
 # Вывод результатов в римской системе
 print(roman.roma(plus))
 print(roman.roma(minus))
 print(roman.roma(umnozhit))
-print(roman.roma(int(razdelit)))  # Преобразуем результат деления в int, чтобы избежать ошибок
+print(roman.roma(razdelit))
