@@ -1,171 +1,154 @@
 class AirCastle:
-    def __init__(self, height, n_clouds, color)->None:
-        """
-        Инициализация замка с заданной высотой, количеством облаков и цветом.
+    """
+    Класс, представляющий воздушный замок.
+    """
 
-        :param height: Высота замка (в метрах).
+    def __init__(self, height: int, n_clouds: int, color: str) -> None:
+        """
+        Создает объект воздушного замка.
+
+        :param height: Высота замка в метрах.
         :param n_clouds: Количество облаков вокруг замка.
         :param color: Цвет замка.
         """
-        self.height = height
+        self._height = height  # Используем инкапсуляцию
         self.n_clouds = n_clouds
         self.color = color
 
-    def change_height(self, value)->None:
+    @property
+    def height(self) -> int:
+        """Геттер для высоты замка."""
+        return self._height
+
+    @height.setter
+    def height(self, value: int) -> None:
+        """Сеттер для высоты, проверяющий корректность значения."""
+        if value >= 0:
+            self._height = value
+        else:
+            raise ValueError("Высота не может быть отрицательной.")
+
+    def change_height(self, value: int) -> None:
         """
-        Изменяет высоту замка, если значение больше или равно 0.
+        Изменяет высоту замка, если переданное значение корректно.
 
         :param value: Новое значение высоты.
         """
-        if value >= 0:
-            self.height = value
+        self.height = value
 
-    def sum(self, n)->None:
+    def sum(self, n: int) -> None:
         """
-        Увеличивает количество облаков и соответственно высоту замка.
+        Увеличивает количество облаков и при необходимости высоту замка.
 
-        :param n: Количество облаков, на которое увеличивается число.
+        :param n: Количество добавляемых облаков.
         """
         self.n_clouds += n
         self.height += n // 5
 
-    def __call__(self, transparency)->int:
+    def __call__(self, transparency: int) -> int:
         """
-        Возвращает результат вычислений, связанный с прозрачностью.
+        Вычисляет некоторый параметр, зависящий от прозрачности.
 
-        :param transparency: Прозрачность, с которой связано вычисление.
-        :return: Результат (высота / прозрачность) * количество облаков.
+        :param transparency: Коэффициент прозрачности.
+        :return: Вычисленное значение.
         """
         return self.height // transparency * self.n_clouds
 
-    def __str__(self)->str:
+    def __str__(self) -> str:
         """
-        Возвращает строковое представление замка.
+        Возвращает текстовое представление замка.
+        """
+        return f"The AirCastle at {self.height} meters is {self.color} with {self.n_clouds} clouds"
 
-        :return: Описание замка (высота, цвет, количество облаков).
-        """
-        return f"The AirCastle at an altitude of {self.height} meters is {self.color} with {self.n_clouds} clouds"
-
-    def __eq__(self, other)->bool:
-        """
-        Проверяет равенство двух замков по высоте, цвету и количеству облаков.
-
-        :param other: Другой объект для сравнения.
-        :return: True, если замки одинаковые, иначе False.
-        """
+    def __eq__(self, other) -> bool:
         return (self.n_clouds, self.height, self.color) == (other.n_clouds, other.height, other.color)
 
-    def __lt__(self, other)->bool:
-        """
-        Проверяет, меньше ли текущий замок другого по количеству облаков, высоте и цвету.
-
-        :param other: Другой объект для сравнения.
-        :return: True, если текущий замок меньше, иначе False.
-        """
+    def __lt__(self, other) -> bool:
         return (self.n_clouds, self.height, self.color) < (other.n_clouds, other.height, other.color)
 
-    def __le__(self, other)->bool:
-        """
-        Проверяет, меньше или равно ли текущее состояние замка состоянию другого замка.
-
-        :param other: Другой объект для сравнения.
-        :return: True, если текущий замок меньше или равен другому, иначе False.
-        """
+    def __le__(self, other) -> bool:
         return (self.n_clouds, self.height, self.color) <= (other.n_clouds, other.height, other.color)
 
-    def __gt__(self, other)->bool:
-        """
-        Проверяет, больше ли текущий замок другого по количеству облаков, высоте и цвету.
-
-        :param other: Другой объект для сравнения.
-        :return: True, если текущий замок больше, иначе False.
-        """
+    def __gt__(self, other) -> bool:
         return (self.n_clouds, self.height, self.color) > (other.n_clouds, other.height, other.color)
 
-    def __ge__(self, other)->bool:
-        """
-        Проверяет, больше или равно ли текущее состояние замка состоянию другого замка.
-
-        :param other: Другой объект для сравнения.
-        :return: True, если текущий замок больше или равен другому, иначе False.
-        """
+    def __ge__(self, other) -> bool:
         return (self.n_clouds, self.height, self.color) >= (other.n_clouds, other.height, other.color)
 
-    def __ne__(self, other)->bool:
-        """
-        Проверяет, не равен ли текущий замок другому.
-
-        :param other: Другой объект для сравнения.
-        :return: True, если замки не равны, иначе False.
-        """
+    def __ne__(self, other) -> bool:
         return (self.n_clouds, self.height, self.color) != (other.n_clouds, other.height, other.color)
 
 
 class MagicAirCastle(AirCastle):
-    def __init__(self, height, n_clouds, color, magic_power)->None:
-        """
-        Инициализация волшебного замка с магической силой.
+    """
+    Класс, представляющий волшебный воздушный замок.
+    """
 
-        :param height: Высота замка (в метрах).
+    def __init__(self, height: int, n_clouds: int, color: str, magic_power: int) -> None:
+        """
+        Создает объект волшебного замка.
+
+        :param height: Высота замка в метрах.
         :param n_clouds: Количество облаков вокруг замка.
         :param color: Цвет замка.
-        :param magic_power: Магическая сила замка.
+        :param magic_power: Магическая сила.
         """
-        AirCastle.__init__(self, height, n_clouds, color)  # Явный вызов конструктора родительского класса
+        super().__init__(height, n_clouds, color)
         self.magic_power = magic_power
 
-    def cast_spell(self)->str:
+    def cast_spell(self) -> str:
         """
-        Произносит заклинание с магической силой замка.
-
-        :return: Строка с описанием магической силы.
+        Возвращает строку с описанием магической силы замка.
         """
         return f"магическая мощь {self.magic_power}!"
 
 
-# Композиция
 class Cloud:
-    def __init__(self, size)->None:
+    """
+    Класс, представляющий облако.
+    """
+
+    def __init__(self, size: int) -> None:
         """
-        Инициализация облака с заданным размером.
+        Создает объект облака.
 
         :param size: Размер облака.
         """
         self.size = size
 
-    def __str__(self)->str:
+    def __str__(self) -> str:
         """
-        Возвращает строковое представление облака.
-
-        :return: Описание облака с его размером.
+        Возвращает текстовое представление облака.
         """
         return f"количество облаков {self.size}"
 
 
 class AirCastleWithClouds:
-    def __init__(self, height, clouds, color)->None:
-        """
-        Инициализация замка с облаками.
+    """
+    Класс, представляющий воздушный замок с облаками (композиция).
+    """
 
-        :param height: Высота замка (в метрах).
-        :param clouds: Список с размерами облаков.
+    def __init__(self, height: int, clouds: list, color: str) -> None:
+        """
+        Создает объект замка с облаками.
+
+        :param height: Высота замка в метрах.
+        :param clouds: Список размеров облаков.
         :param color: Цвет замка.
         """
         self.height = height
         self.clouds = [Cloud(size) for size in clouds]
         self.color = color
 
-    def __str__(self)->str:
+    def __str__(self) -> str:
         """
-        Возвращает строковое представление замка с облаками.
-
-        :return: Описание замка с облаками.
+        Возвращает текстовое представление замка с облаками.
         """
         clouds_info = ", ".join(str(cloud) for cloud in self.clouds)
-        return f"The AirCastle at an altitude of {self.height} meters is {self.color} with clouds: {clouds_info}"
+        return f"The AirCastle at {self.height} meters is {self.color} with clouds: {clouds_info}"
 
 
-# Использование
+# Тестирование классов
 num1 = AirCastle(23, 3, "green")
 num1.change_height(3)
 num2 = AirCastle(13, 4, "red")
@@ -173,8 +156,3 @@ num2 = AirCastle(13, 4, "red")
 print(f"num2 >= num1 = {num2 >= num1}")
 print(f"Прозрачность: {num1(2)}")
 print(num1)
-
-"""вывод:
-num2 >= num1 = True
-Прозрачность: 3
-The AirCastle at an altitude of 3 meters is green with 3 clouds"""
