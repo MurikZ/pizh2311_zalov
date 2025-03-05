@@ -1,6 +1,6 @@
 import deposit
 
-def get_input(prompt: str, type_func: type) -> int | float:
+def get_input(prompt: str) -> int :
     """
     Запрашивает ввод у пользователя и преобразует его в указанный тип.
 
@@ -16,7 +16,7 @@ def get_input(prompt: str, type_func: type) -> int | float:
     """
     while True:
         try:
-            return type_func(input(prompt))
+            return int(input(prompt))
         except ValueError:
             print("Введено неправильное значение. Пожалуйста, попробуйте еще раз.")
 
@@ -30,12 +30,12 @@ def main() -> None:
     """
     # Запрос у пользователя типа вклада
     a = get_input(
-        "Введи какой вклад тебе нужен\n1 - срочный\n2 - бонусный\n3 - с капитализацией\n", int
+        "Введи какой вклад тебе нужен\n1 - срочный\n2 - бонусный\n3 - с капитализацией\n"
     )
 
     # Запрос суммы и срока вклада
-    summa = get_input("Введи сумму вклада: ", int)
-    period = get_input("Введи срок вклада: ", int)
+    summa = get_input("Введи сумму вклада: ")
+    period = get_input("Введи срок вклада: ")
 
     # Выбор вклада и расчет прибыли
     if a == 1:
