@@ -97,7 +97,7 @@ class Capital(Deposit):
     Наследует атрибуты и методы класса Deposit.
     """
 
-    def __init__(self, period: int, summa: float, procent: float, capital: int) -> None:
+    def __init__(self, procent: float, period: int, summa: float, capital: int) -> None:
         """
         Инициализирует объект вклада с капитализацией.
 
