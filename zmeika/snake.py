@@ -26,7 +26,7 @@ APPLE_COLOR = (255, 0, 0)
 SNAKE_COLOR = (0, 255, 0)
 
 # Скорость движения змейки:
-SPEED = 10
+SPEED = 15
 
 # Настройка игрового окна:
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
@@ -114,7 +114,7 @@ class Snake(GameObject):
         self.positions.insert(0, new_position)
 
         if len(self.positions) > self.length:
-            self.positions.pop()
+             self.positions.pop()
 
     def get_head_position(self):
         """Возвращает позицию головы змейки."""
@@ -160,38 +160,3 @@ def handle_keys(game_object):
                 game_object.next_direction = RIGHT
 
 
-def main():
-    """Основная функция игры, содержащая главный игровой цикл."""
-    pygame.init()
-
-    snake = Snake()
-    apple = Apple()
-
-    while True:
-        clock.tick(SPEED)
-
-        handle_keys(snake)
-        snake.update_direction()
-        snake.move()
-
-        # Проверка съедания яблока
-        if snake.get_head_position() == apple.position:
-            snake.length += 1
-            apple.randomize_position()
-            # Убедимся, что яблоко не появилось на змейке
-            while apple.position in snake.positions:
-                apple.randomize_position()
-
-        # Проверка столкновения с собой
-        if snake.get_head_position() in snake.positions[1:]:
-            snake.reset()
-
-        # Отрисовка
-        screen.fill(BOARD_BACKGROUND_COLOR)
-        snake.draw()
-        apple.draw()
-        pygame.display.update()
-
-
-if __name__ == '__main__':
-    main()
